@@ -1,4 +1,21 @@
-﻿<div class="nav-bar">
+﻿@inject IContextModeResolver modeResolver
+
+@using Builderz.Business.ExtensionMethods
+@using Builderz.Models.Pages
+@using Builderz.Models.ViewModels
+@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+@model IPageViewModel<SitePageData>
+
+@{
+    HelperResult ItemTemplate(HtmlHelpers.MenuItem item)
+    {
+        @Html.PageLink(item.Page, null, new { @class = "nav-item nav-link" + (item.Selected ? " active" : null) })        
+        return new HelperResult(w => Task.CompletedTask);
+    }
+}
+
+<div class="nav-bar">
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
             <a href="#" class="navbar-brand">MENU</a>
@@ -7,20 +24,9 @@
             </button>
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="navbar-nav mr-auto">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Service</a>
-                    <a href="team.html" class="nav-item nav-link">Team</a>
-                    <a href="portfolio.html" class="nav-item nav-link">Project</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu">
-                            <a href="blog.html" class="dropdown-item">Blog Page</a>
-                            <a href="single.html" class="dropdown-item">Single Page</a>
-                        </div>
-                    </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <div class="navbar-nav mr-auto">                    
+                    @Html.PageLink(Model.StartPage, null, new {@class = "nav-item nav-link " + (Model.CurrentPage.ContentLink.CompareToIgnoreWorkID(ContentReference.StartPage) ? " active" : null)})
+                    @Html.MenuList(ContentReference.StartPage, ItemTemplate) 
                 </div>
                 <div class="ml-auto">
                     <a class="btn" href="#">Get A Quote</a>
