@@ -1,0 +1,31 @@
+﻿@model IList<Builderz.Models.Blocks.FAQItemBlock>
+
+@if (Model != null && Model.Any())
+{
+    var index = int.Parse(ViewData["index"].ToString());
+
+    <div class="col-md-6">
+        <div id='@ViewData["colName"]'>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                Builderz.Models.Blocks.FAQItemBlock item = Model[i];
+                var collapseName = "collapse" + (index + i);
+                var delay = $"0.{i}s";
+                                
+                <div class="card wow fadeInLeft" data-wow-delay="@delay">
+                    <div class="card-header">
+                        <a class="card-link collapsed" data-toggle="collapse" href="#@collapseName">
+                            @item.Header
+                        </a>
+                    </div>
+
+                    <div id="@collapseName" class="collapse" data-parent='#@ViewData["colName"]'>
+                        <div class="card-body">
+                            @item.Body
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

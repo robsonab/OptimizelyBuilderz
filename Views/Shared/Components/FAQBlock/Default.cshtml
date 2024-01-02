@@ -1,0 +1,32 @@
+﻿@model Builderz.Models.ViewModels.FAQBlockViewModel
+
+<!-- FAQs Start -->
+<div class="faqs">
+    <div class="container">
+
+        <div class="section-header text-center">
+            <p>@Html.PropertyFor(p => p.CurrentBlock.Title)</p>
+            <h2>@Html.PropertyFor(p => p.CurrentBlock.SubTitle)</h2>
+        </div>
+
+        @if (Model.CurrentBlock.FAQItems != null && Model.CurrentBlock.FAQItems.Any())
+        {
+            <div class="row">
+
+                @if (Model.Col1.Any())
+                {
+                    var viewData = new ViewDataDictionary(ViewData) { { "colName", "accordion-1" }, { "index", "0" } };
+                    @await Html.PartialAsync("/Views/Shared/Components/FAQBlock/_FAQItemBlockView.cshtml", Model.Col1, viewData)
+
+                }
+                @if (Model.Col2.Any())
+                {
+                    var viewData = new ViewDataDictionary(ViewData) { { "colName", "accordion-2" }, { "index", Model.Col1.Count.ToString() } };
+                    @await Html.PartialAsync("/Views/Shared/Components/FAQBlock/_FAQItemBlockView.cshtml", Model.Col2, viewData)
+                }
+
+            </div>
+        }
+    </div>
+</div>
+<!-- FAQs End -->
