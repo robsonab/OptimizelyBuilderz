@@ -16,7 +16,7 @@ namespace Builderz.Components
                 CurrentBlock = currentBlock,
                 TodaysVisitorCount = new Random().Next(300, 900)
             };
-            return View(viewmodel);
+            return View(currentBlock);
         }
     }
 }
