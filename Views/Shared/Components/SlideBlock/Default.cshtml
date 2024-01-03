@@ -1,0 +1,17 @@
+﻿@inject IContextModeResolver contextModeResolver
+@model Builderz.Models.Blocks.SlideBlock
+
+@{
+    var style = "";
+    if (contextModeResolver.CurrentMode == ContextMode.Edit)
+    {
+        style = "max-height: 25em";
+    }
+}
+
+@Html.PropertyFor(p => p.Image)
+<div class="carousel-caption" style="@style">
+    <p class="animated fadeInRight">@Html.PropertyFor(p => p.Title)</p>
+    <h1 class="animated fadeInLeft">@Html.PropertyFor(p => p.SubTitle)</h1>
+    <a class="btn animated fadeInUp" href="https://htmlcodex.com/construction-company-website-template">Get A Quote</a>
+</div>

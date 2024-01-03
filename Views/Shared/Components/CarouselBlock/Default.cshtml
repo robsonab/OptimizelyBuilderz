@@ -1,0 +1,59 @@
+﻿@inject IContextModeResolver contextModeResolver
+@model Builderz.Models.Blocks.CarouselBlock
+@{
+    var style = "";
+    if (contextModeResolver.CurrentMode == ContextMode.Edit)
+    {
+        style = "max-height: 25em";
+    }
+}
+<!-- Carousel Start -->
+<div id="carousel" class="carousel slide" data-ride="carousel" style="@style">
+    <ol class="carousel-indicators">
+        @RenderSlidesList(Model.Slides)
+    </ol>
+
+    <div class="carousel-inner">
+        @RenderBlocks(Model.Slides)
+    </div>
+
+    <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<!-- Carousel End -->
+@{
+    HelperResult RenderBlocks(EPiServer.Core.ContentArea content)
+    {
+        if (null != content)
+        {
+            foreach (var block in content.Items)
+            {
+                var cssClass = "carousel-item";
+                if (block == content.Items[0]) { cssClass += " active"; }
+
+                @Html.PropertyFor(x => block, new { CssClass = cssClass })
+            }
+        }
+
+        return new HelperResult(w => Task.CompletedTask);
+    }
+
+    HelperResult RenderSlidesList(EPiServer.Core.ContentArea content)
+    {
+        if (null != content)
+        {
+            for (int i = 0; i < content.Items.Count; i++)
+            {
+                <li data-target="#carousel" data-slide-to="@i" class='@i == 0 ? "active" : ""'></li>
+            }
+        }
+
+        return new HelperResult(w => Task.CompletedTask);
+    }
+}
