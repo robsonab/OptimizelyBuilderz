@@ -1,0 +1,25 @@
+﻿@model Builderz.Models.Blocks.TeaserBlock
+
+<!-- About Start -->
+<div class="about wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5 col-md-6">
+                <div class="about-img">
+                    @Html.PropertyFor(p=> p.TeaserImage)
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-6">
+                <div class="section-header text-left">
+                    <p>@Html.PropertyFor(p => p.Title)</p>
+                    <h2>@Html.PropertyFor(p =>p.SubTitle)</h2>
+                </div>
+                <div class="about-text">
+                    @Html.PropertyFor(p => p.Body)
+                    <a class="btn" href="">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
