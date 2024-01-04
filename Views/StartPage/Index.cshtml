@@ -2,12 +2,12 @@
 @using EPiServer.Web.Mvc.Html
 @model PageViewModel<Builderz.Models.Pages.StartPage>
 
-<h1 @Html.EditAttributes(m => m.CurrentPage.Heading)>
+@* <h1 @Html.EditAttributes(m => m.CurrentPage.Heading)>
     @(Model.CurrentPage.Heading ?? Model.CurrentPage.Name)
 </h1>
 <div>
     @Html.PropertyFor(m => m.CurrentPage.MainBody)
-</div>
+</div> *@
 <div>
     @Html.PropertyFor(m => m.CurrentPage.MainContentArea)
 </div>
