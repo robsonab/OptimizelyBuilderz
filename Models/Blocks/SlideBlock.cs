@@ -7,11 +7,11 @@ namespace Builderz.Models.Blocks
     public class SlideBlock : BlockData
     {
         [CultureSpecific]
-        [Display(Name = "Title", Order = 10, GroupName = SystemTabNames.PageHeader)]
+        [Display(Name = "Title", Order = 10)]
         public virtual string Title { get; set; }
 
         [CultureSpecific]
-        [Display(Name = "SubTitle", Order = 20, GroupName = SystemTabNames.PageHeader)]
+        [Display(Name = "SubTitle", Order = 20)]
         public virtual string SubTitle { get; set; }
 
         [CultureSpecific]
