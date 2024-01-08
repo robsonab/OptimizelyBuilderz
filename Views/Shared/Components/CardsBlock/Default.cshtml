@@ -1,0 +1,22 @@
+﻿@using Builderz.Models.Blocks;
+@model Builderz.Models.Blocks.CardsBlock
+
+<!-- Service Start -->
+<div class="service">
+    <div class="container">
+        <div class="section-header text-center">
+            <p>@Html.PropertyFor(p=>p.Title)</p>
+            <h2>@Html.PropertyFor(p=>p.SubTitle)</h2>
+        </div>
+        <div class="row">
+            @if (Model.Items != null)
+            {
+                foreach (var card in Model.Items)
+                {
+                    @await Html.PartialAsync("/Views/Shared/Components/CardsBlock/_CardItemView.cshtml", card)
+                }
+            }
+        </div>
+    </div>
+</div>
+<!-- Service End -->
