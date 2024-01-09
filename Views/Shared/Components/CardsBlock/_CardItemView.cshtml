@@ -11,9 +11,8 @@
                 </div>
             </div>
             <div class="service-text">
-                <h3>@Html.PropertyFor(p=> p.Title)</h3>    
-                
-                @* <a class="btn" href="img/service-1.jpg" data-lightbox="service">+</a> *@
+                <h3>@Html.PropertyFor(p=> p.Title)</h3>
+                <a class="btn" href="@Url.ContentUrl(Model.Image)" data-lightbox="service">+</a>
             </div>
         </div>
     </div>
