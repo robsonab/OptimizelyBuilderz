@@ -71,7 +71,7 @@ namespace Builderz.Business.ExtensionMethods
                 Selected = page.ContentLink.CompareToIgnoreWorkID(currentContentLink) ||
                            pagePath.Contains(page.ContentLink),
 
-                HasChildren = new Lazy<bool>(() => filter(contentLoader.GetChildren<PageData>(page.ContentLink)).Any())
+                Children = filter(contentLoader.GetChildren<PageData>(page.ContentLink)).ToList()
             };
 
             return menuItem;
@@ -97,7 +97,7 @@ namespace Builderz.Business.ExtensionMethods
 
             public bool Selected { get; set; }
 
-            public Lazy<bool> HasChildren { get; set; }
+            public IList<PageData> Children { get; set; }
         }
 
         /// <summary>

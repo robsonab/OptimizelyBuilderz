@@ -32,7 +32,8 @@ namespace Builderz.Controllers
             viewmodel.MenuPages = FilterForVisitor
                                     .Filter(loader.GetChildren<SitePageData>(ContentReference.StartPage))
                                     .Cast<SitePageData>()
-                                    .Where(page => page.VisibleInMenu);
+                                    .Where(page => page.VisibleInMenu)
+                                    .ToList();
             viewmodel.Section = currentPage.ContentLink.GetSection();
             return viewmodel;
         }

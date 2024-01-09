@@ -10,7 +10,25 @@
 @{
     HelperResult ItemTemplate(HtmlHelpers.MenuItem item)
     {
-        @Html.PageLink(item.Page, null, new { @class = "nav-item nav-link" + (item.Selected ? " active" : null) })        
+        var active = item.Selected ? " active" : "";
+        
+        @if (item.Children.Any() == false)
+        {
+            @Html.PageLink(item.Page, null, new { @class = "nav-item nav-link" + active })
+        }
+        else
+        {
+            <div class="nav-item dropdown">                
+                <a href="#" class='nav-link dropdown-toggle + @active' data-toggle="dropdown">@item.Page.Name</a>
+                <div class="dropdown-menu">
+                    @foreach (var child in item.Children)
+                    {                        
+                        <a href='@child.LinkURL' class="dropdown-item">@child.Name</a>
+                    }
+                </div>
+            </div>
+        }
+
         return new HelperResult(w => Task.CompletedTask);
     }
 }
@@ -24,13 +42,10 @@
             </button>
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="navbar-nav mr-auto">                    
+                <div class="navbar-nav mr-auto">
                     @Html.PageLink(Model.StartPage, null, new {@class = "nav-item nav-link " + (Model.CurrentPage.ContentLink.CompareToIgnoreWorkID(ContentReference.StartPage) ? " active" : null)})
-                    @Html.MenuList(ContentReference.StartPage, ItemTemplate) 
-                </div>
-                <div class="ml-auto">
-                    <a class="btn" href="#">Get A Quote</a>
-                </div>
+                    @Html.MenuList(ContentReference.StartPage, ItemTemplate)
+                </div>                
             </div>
         </nav>
     </div>
