@@ -1,0 +1,13 @@
+﻿@model Builderz.Models.Blocks.RecentPostItem
+<div class="post-item">
+    <div class="post-img">        
+        @Html.PropertyFor(p=>p.Image)
+    </div>
+    <div class="post-text">
+        <a href="">@Html.PropertyFor(p=>p.Title)</a>
+        <div class="post-meta">
+            <p>By<a href="">@Html.PropertyFor(p=> p.UserName)</a></p>
+            <p>In<a href="">@Html.PropertyFor(p=> p.Place)</a></p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+﻿@model Builderz.Models.Blocks.ArticleBlock
+
+<div class="single-content wow fadeInUp">    
+    @Html.PropertyFor(p=> p.Image)
+    <h2>@Html.PropertyFor(p=> p.Title)</h2>
+    @Html.PropertyFor(p=>p.MainBody)
+</div>

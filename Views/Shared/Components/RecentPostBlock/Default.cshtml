@@ -1,0 +1,14 @@
+﻿@model Builderz.Models.Blocks.RecentPostBlock
+
+@if (Model != null && Model.Items != null && Model.Items.Any())
+{
+    <div class="sidebar-widget wow fadeInUp">
+        <h2 class="widget-title">@Html.PropertyFor(p=>p.Title)</h2>
+        <div class="recent-post">
+            @foreach (var item in Model.Items)
+            {
+                @await Html.PartialAsync("/Views/Shared/Components/RecentPostBlock/_PostDetailItem.cshtml", item)
+            }
+        </div>
+    </div>
+}

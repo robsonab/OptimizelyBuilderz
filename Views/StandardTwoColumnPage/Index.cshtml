@@ -1,0 +1,32 @@
+﻿@model PageViewModel<StandardTwoColumnPage>
+
+<!-- Page Header Start -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>@Model.CurrentPage.Name</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Single Post Start-->
+<div class="single">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8">
+                @Html.PropertyFor(m => m.CurrentPage.MainContentArea)
+            </div>
+
+            <div class="col-lg-4">
+                <div class="sidebar">
+                    @Html.PropertyFor(m => m.CurrentPage.SideContentArea)
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Single Post End-->  
