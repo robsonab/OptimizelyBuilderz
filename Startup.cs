@@ -24,11 +24,24 @@ namespace Builderz
                 services.Configure<SchedulerOptions>(options => options.Enabled = false);
             }
 
+            // Add CORS policy
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReactApp",
+                    builder => builder
+                        .WithOrigins("http://localhost:3000")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
+
+
             services
                 .AddCmsAspNetIdentity<ApplicationUser>()
                 .AddCms()
                 .AddAdminUserRegistration()
-                .AddEmbeddedLocalization<Startup>();
+                .AddEmbeddedLocalization<Startup>()
+                .AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -42,10 +55,15 @@ namespace Builderz
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseHttpsRedirection();
+
+            // Enable CORS using the policy
+            app.UseCors("AllowReactApp");
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapContent();
+                endpoints.MapControllers();                
             });
         }
     }
