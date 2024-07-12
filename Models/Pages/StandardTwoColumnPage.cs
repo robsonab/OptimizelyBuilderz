@@ -2,7 +2,7 @@
 
 namespace Builderz.Models.Pages
 {
-    [ContentType(DisplayName = "Standard",
+    [ContentType(DisplayName = "Standard Two Column",
          GroupName = SiteGroupNames.Common,
          GUID = "d9e12581-a61d-4f8c-8f50-93f48fb352b3",
          Description = "Standard page with two columns")]
