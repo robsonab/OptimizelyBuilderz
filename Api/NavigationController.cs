@@ -1,10 +1,6 @@
 ﻿using Builderz.Business.ExtensionMethods;
 using Builderz.Models.Pages;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
-using EPiServer.ServiceLocation;
-using EPiServer.Shell.Navigation;
 using EPiServer.Web.Routing;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Builderz.Api
@@ -15,11 +11,12 @@ namespace Builderz.Api
     {
         private readonly IContentLoader _contentLoader;
         private readonly UrlResolver _urlResolver;
-
+        
+        
         public NavigationController(IContentLoader contentLoader, UrlResolver urlResolver)
         {
             _contentLoader = contentLoader;
-            _urlResolver = urlResolver;
+            _urlResolver = urlResolver; 
         }
 
         [HttpGet]
@@ -43,8 +40,7 @@ namespace Builderz.Api
 
             return new JsonResult(pages);
         }
-
-
+                 
 
         private class Menu
         {
