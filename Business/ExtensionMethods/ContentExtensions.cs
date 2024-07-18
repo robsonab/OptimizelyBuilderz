@@ -1,6 +1,7 @@
 ﻿using EPiServer.Filters;
 using EPiServer.Framework.Web;
 using EPiServer.ServiceLocation;
+using EPiServer.Web.Routing;
 
 namespace Builderz.Business.ExtensionMethods
 {
@@ -51,6 +52,12 @@ namespace Builderz.Business.ExtensionMethods
             }
 
             return page.VisibleInMenu;
+        }
+
+        public static string FullUrl(this ContentReference content, HttpRequest request, UrlResolver urlResolver) 
+        {
+            return new Uri(new Uri(request.Scheme + "://" + request.Host.Value),
+                                urlResolver.GetUrl(content)).ToString();
         }
     }
 }

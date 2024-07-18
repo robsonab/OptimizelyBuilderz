@@ -1,6 +1,8 @@
 ﻿using Builderz.Models.Blocks;
 using EPiServer.Web.Routing;
 using Microsoft.AspNetCore.Mvc;
+using Builderz.Business.ExtensionMethods;
+using SixLabors.ImageSharp;
 
 namespace Builderz.Api
 {
@@ -42,10 +44,9 @@ namespace Builderz.Api
                                             .Select(slide => new
                                             {
                                                 slide.Title,
-                                                slide.SubTitle,
-                                                Image = _urlResolver.GetUrl(_contentRepository.Get<IContent>(slide.Image) as ImageData),
-                                                Link = _urlResolver.GetUrl(slide.Link),
-
+                                                slide.SubTitle,                                                
+                                                Image = slide.Image.FullUrl(Request, _urlResolver),
+                                                Link = slide.Link.FullUrl(Request, _urlResolver),
                                             })
                                             .ToList()
                 };
