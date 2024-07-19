@@ -24,9 +24,5 @@ namespace Builderz.Models.Pages
                 GroupName = SystemTabNames.Content, Order = 20)]
         public virtual XhtmlString MainBody { get; set; }
         
-        [Display(Name = "Main content area",
-                Description = "The main content area contains an ordered collection to content references, for example blocks, media assets, and pages.",
-                GroupName = SystemTabNames.Content, Order = 30)]
-        public virtual ContentArea MainContentArea { get; set; }
     }
 }

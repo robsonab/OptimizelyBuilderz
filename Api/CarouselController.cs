@@ -23,16 +23,20 @@ namespace Builderz.Api
         [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
-            //var pageId = new ContentReference(id);
-            //var page = _pageSearchService.GetPageById<StandardPage>(pageId);
-            //if (page == null)
-            //{
-            //    return NotFound();
-            //}
-
             var content = _contentRepository.Get<IContent>(new ContentReference(id));
             if (content is CarouselBlock carouselBlock)
             {
+                if (carouselBlock.Slides == null)
+                {
+
+                    return Ok(new
+                    {
+                        carouselBlock.PreviousText,
+                        carouselBlock.NextText,
+                        carouselBlock.ShowTextLabels,
+                        Slides = new List<string>()
+                    });
+                }
                 var carousel = new
                 {
                     carouselBlock.PreviousText,
@@ -44,7 +48,7 @@ namespace Builderz.Api
                                             .Select(slide => new
                                             {
                                                 slide.Title,
-                                                slide.SubTitle,                                                
+                                                slide.SubTitle,
                                                 Image = slide.Image.FullUrl(Request, _urlResolver),
                                                 Link = slide.Link.FullUrl(Request, _urlResolver),
                                             })
